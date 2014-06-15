@@ -13,3 +13,14 @@ It inherits default styling from Google Chrome's WebUI, which looks fittingly ou
 
 So this is just a little javascript context menu script which takes that to heart. Coupled with [solitude](https://github.com/naptha/solitude), my horribly nasty approach to CSS isolation, this can be used to inject context menus as content scripts onto web pages running potentially evil CSS. 
 
+
+### but wait
+
+so the great strength of this context menu script is that it probably pays more attention to user experience than anything else out there at the moment. this does run with a rather substantial caveat.
+
+there's a widespread misconception that ancient cartographic maps had undiscovered regions of the oceans marked with "HIC SUNT DRACONES", or "HERE BE DRAGONS". there isn't really any evidence that this was ever done in any map from the time period.
+
+and back then, there were tons of things that were pretty terrifying- ship wrecks, being stranded at sea with no ability to discern longitude, scurvy and more. but those wise cartographers deemed none of these to be so truly horrific to bear a warning of dragons, to spare that label for when the time came that something would truly be worthy of that warning: my code. 
+
+
+
