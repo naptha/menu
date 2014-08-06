@@ -22,6 +22,17 @@ there's a widespread misconception that ancient cartographic maps had undiscover
 
 and back then, there were tons of things that were pretty terrifying- ship wrecks, being stranded at sea with no ability to discern longitude, scurvy and more. but those wise cartographers deemed none of these to be so truly horrific to bear a warning of dragons, to spare that label for when the time came that something would truly be worthy of that warning: my code. 
 
+### features
+
+* it's going to show a menu where your cursor is when you right click
+* menus can be hierarchical
+* menu items can be checkboxes
+* stick arbitrary html into your menu items
+* support for keyboard driven navigation (including fuzzy searching for matches)
+* scrollable, because how bad of an idea could it possibly be to scroll within a context menu?
+
+
 ### what is it gonna look like
 
 ![mock of what the menu can be](mock.png)
+
