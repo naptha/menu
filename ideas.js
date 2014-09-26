@@ -74,3 +74,176 @@ function(item){
 document.addEventListener("contextmenu", function(e){
   menu.contextmenu(e)
 })
+
+
+// what should the items specificaiton look like?
+// ignore falsey values (false, null, etc)
+// regular strings are simple menu items
+// arrays are automatically flattened
+// normally its an array object
+// the contents can be specified with the fields
+// {text, html, dom} where text and html are strings
+
+// it's exposed as one function: context_menu
+// calling it paints a context menu at the given
+// position
+
+
+// i.e. context_menu(root_menu, e.clientX, e.clientY)
+
+
+function root_menu(state){
+  return [
+    { text: 'Check Me!', checked: state.field1, toggle: function(val){ state.field1 = val; } }
+  ]
+}
+
+
+document.addEventListener('contextmenu', right_click, true)
+
+function right_click(e){
+  e.preventDefault()
+  e.stopImmediatePropagation()
+  e.stopPropagation()
+
+  if(menu_levels.some(function(menu){ return is_child(e.target, menu) })) return;
+
+
+  context_menu(root_menu(), e.clientX, e.clientY)
+}
+
+function root_menu(){
+  var items = [
+    {html: 'Copy Text'},
+    {html: 'Open in New Tab'},
+    {html: 'Search for <span style="color: gray">\'mozilla\'</span>'},
+    '-',
+    {html: 'Language', items: lang_menu},
+    {html: 'Translate', items: trans_menu},
+    '-',
+    {html: 'Options', items: opt_menu},
+    {html: 'Advanced', items: adv_menu},
+    {html: 'naptha <small>0.8.2</small>', gray: true},
+  ];
+  return items;
+}
+
+function lang_menu(){
+  function engine(id, name){
+    return {html: name, checked: id == 'ocrad'}
+  }
+  var items = [
+    engine('ocrad', "English <small>Ocrad.js</small>"),
+    '+',
+    engine("tess:eng", "English <small>Tesseract</small>"),
+    engine("tess:joh", "Internet Meme"),
+    engine("tess:rus", "Russian"),
+    engine("tess:deu", "German"),
+    engine("tess:spa", "Spanish"),
+    engine("tess:chi_sim", "Chinese Simplified"),
+    '-',
+    engine("tess:chi_tra", "Chinese Traditional"),
+    engine("tess:fra", "French"),
+    engine("tess:jpn", "Japanese"),
+    engine("tess:chi_tra", "Chinese Traditional"),
+    engine("tess:fra", "French"),
+    engine("tess:joh", "Internet Meme"),
+    engine("tess:rus", "Russian"),
+    engine("tess:deu", "German"),
+    engine("tess:spa", "Spanish"),
+    engine("tess:jpn", "Japanese"),
+    engine("tess:joh", "Internet Meme"),
+    engine("tess:rus", "Russian"),
+    engine("tess:deu", "German"),
+    engine("tess:spa", "Spanish"),
+    engine("tess:jpn", "Japanese"),
+  ];
+  return items;
+}
+
+function trans_menu(){
+  function engine(id, name){
+    return {html: name, checked: id === null}
+  }
+  var items = [
+    engine(null, 'No Translation'),
+    engine('erase', 'Erase Text'),
+    engine('custom', 'Modify Text <small>(BETA)</small>'),
+    {type: 'scroll', height: 200},
+    engine('en', 'English <small>Google Translate</small>'),
+    engine('es', 'Spanish <small>Microsoft Translate</small>'),
+    engine('ru', 'Russian <small>Yandex Translate</small>'),
+    engine('zh-CN', 'Chinese Simplified'),
+    engine('zh-TW', 'Chinese Traditional'),
+    
+    true && engine('pt', 'ONE'),
+    false && engine('de', 'TWO'),
+    null && engine('zh-CN', 'THREE'),
+    undefined && engine('zh-TW', 'FOUR'),
+
+    '-',
+    engine('ja', 'Japanese'),
+    engine('pt', 'Portuguese'),
+    engine('de', 'German'),
+    [
+      engine('zh-CN', 'Chinese Simplified'),
+      engine('zh-TW', 'Chinese Traditional'),
+      engine('ja', 'Japanese'),
+      engine('pt', 'Portuguese'),
+      engine('de', 'German'),
+      engine('zh-CN', 'Chinese Simplified'),
+      engine('zh-TW', 'Chinese Traditional'),
+      engine('ja', 'Japanese'),
+    ],
+    engine('pt', 'Portuguese'),
+    engine('de', 'German'),
+    engine('zh-CN', 'Chinese Simplified'),
+    engine('zh-TW', 'Chinese Traditional'),
+    engine('ja', 'Japanese'),
+    engine('pt', 'Portuguese'),
+    engine('de', 'German'),
+    engine('zh-CN', 'Chinese Simplified'),
+    engine('zh-TW', 'Chinese Traditional'),
+    engine('ja', 'Japanese'),
+    engine('pt', 'Portuguese'),
+    engine('de', 'German'),
+  ];
+  return items;
+}
+
+function opt_menu(){
+  var items = [
+    {html: 'Show OCR Disclaimer', checked: true},
+    {html: 'Disable Lookup'},
+    {html: 'Preemptive OCR'},
+    '-',
+    {html: 'Disable for this image'},
+    {html: 'Disable on this page'},
+    {html: 'Disable on <i>test</i>'},
+    '-',
+    {html: 'Add Translate Key'},
+    {html: 'Report Issue'},
+  ];
+  return items;
+}
+
+function adv_menu(){
+  var items = [
+    {html: 'Show Regions'},
+    {html: 'Show Lines'},
+    {html: 'Show Stitching'},
+    {html: 'Show Words'},
+    {html: 'Show Letters'},
+    {html: 'Show Contours'},
+    {html: 'Show Chunks'},
+    {html: 'Show Recognition'},
+    '-',
+    {html: 'Clear State'},
+    {html: 'Debug Mode'},
+  ];
+  return items;
+}
+
+
+
+
