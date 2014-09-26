@@ -49,6 +49,26 @@ var menu = new ContextMenu([
   }
 ]
 
+
+// you can have a function which returns an array
+
+function(){
+  return ["one", "two", "-", "three"]
+}
+
+// or use a helper method thingy?
+
+function(item){
+  item("one")
+  item("two")
+  item({
+    html: "yolo"
+  })
+  item("three")
+  item("-")
+}
+
+
 // TODO: figure out how to do groups
 
 document.addEventListener("contextmenu", function(e){
